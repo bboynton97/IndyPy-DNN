@@ -1,6 +1,6 @@
-#Breast Cancer Identifier
+# Breast Cancer Identifier
 
-##Environment Setup
+## Environment Setup
 macOS or Linux is recommended. Tensorflow now has support for Windows, but they still don’t play well together.
 
 Install Python2.7 or 3
@@ -24,6 +24,15 @@ Install Keras
 Install Keras Dependencies
 `sudo pip install numpy`
 `sudo pip install scipy`
+
+Install Metrics Library
+`sudo pip install sklearn`
+
+Install preprocessing tools
+`sudo pip install pandas`
+
+Copy-paste this line for all:
+`sudo pip install tensorflow && pip install keras && pip install numpy && pip install scipy && pip install pandas && pip install sklearn`
 
 Get our dataset
 Download the breast cancer dataset from:
