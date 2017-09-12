@@ -4,45 +4,41 @@
 macOS or Linux is recommended. Tensorflow now has support for Windows, but they still don’t play well together.
 
 
-Install Python2.7 or 3
-
-
+#### Install Python2.7 or 3
 I will be using Python2.7 in the tutorial.
 `python --version` to check your install
 
-
 If you don’t have Python, you can download it here: https://www.python.org/downloads/
 
-
-Install PIP
+#### Install PIP
 Mac: `sudo easy_install pip`
 Linux: `sudo apt-get install python-pip python-dev`
 Windows: It looked complicated for Windows, so I’m just gunna hope you have it already
 
 
-Install TensorFlow
+#### Install TensorFlow
 *Do not use the GPU-enabled version unless you know what you’re doing*
 `sudo pip install tensorflow`
 
 
-Install Keras
+#### Install Keras
 `sudo pip install keras`
 
 
-Install Keras Dependencies
+#### Install Keras Dependencies
 `sudo pip install numpy`
 `sudo pip install scipy`
 
 
-Install Metrics Library
+#### Install Metrics Library
 `sudo pip install sklearn`
 
 
-Install preprocessing tools
+#### Install preprocessing tools
 `sudo pip install pandas`
 
 
-Copy-paste this line for all:
+### Copy-paste this line for all:
 `sudo pip install tensorflow && pip install keras && pip install numpy && pip install scipy && pip install pandas && pip install sklearn`
 
 
