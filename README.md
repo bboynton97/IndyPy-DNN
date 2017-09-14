@@ -23,8 +23,7 @@ Windows: It looked complicated for Windows, so I’m just gunna hope you have it
 `sudo pip install keras`
 
 #### Install Keras Dependencies
-`sudo pip install numpy`<br />
-`sudo pip install scipy`
+`sudo pip install numpy`
 
 #### Install Metrics Library
 `sudo pip install sklearn`
