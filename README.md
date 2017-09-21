@@ -17,19 +17,19 @@ Windows: It looked complicated for Windows, so I’m just gunna hope you have it
 
 #### Install TensorFlow
 *Do not use the GPU-enabled version unless you know what you’re doing*<br />
-`pip install --user tensorflow`
+`pip install tensorflow`
 
 #### Install Keras
-`pip install --user keras`
+`pip install keras`
 
 #### Install Keras Dependencies
-`pip install --user numpy`
+`pip install numpy`
 
 #### Install Metrics Library
-`pip install --user sklearn`
+`pip install sklearn`
 
 #### Install preprocessing tools
-`pip install --user pandas`
+`pip install pandas`
 
 ### Copy-paste this line for all:
 `sudo pip install tensorflow && pip install keras && pip install numpy && pip install scipy && pip install pandas && pip install sklearn`
