@@ -11,7 +11,6 @@ import numpy as np
 from keras.models import Sequential
 from keras.layers import Dense, Activation
 from sklearn.metrics import accuracy_score
-import math
 
 #Configuration variables
 TEST_SPLIT = 0.1
@@ -19,6 +18,8 @@ HOLE_SYMBOL = '?'
 PREDICTION_COL = 'class'
 HM_EPOCHS = 10
 LEARNING_RATE = 0.001
+HM_INPUTS = 9
+HM_OUTPUTS = 2
 
 #
 #   ~~ 1. preprocessing
@@ -36,11 +37,11 @@ for col in cols: #for each column
     for row in df[col].tolist(): #For every row in the column
         if isinstance(row, (int, long, float, complex)):
             only_nums.append(row) #Add all the numbers to only_nums
-            col_mean = np.mean(only_nums) #Get the average of all the rows
-            new_col = df[col].tolist() #Create new column with the existing column
-            for row in new_col: #Loop through new column
-                if row == HOLE_SYMBOL: #Replace any holes with the average value
-                    new_col[row] = col_mean
+    col_mean = np.mean(only_nums) #Get the average of all the rows
+    new_col = df[col].tolist() #Create new column with the existing column
+    for row in new_col: #Loop through new column
+        if row == HOLE_SYMBOL: #Replace any holes with the average value
+            new_col[row] = col_mean
     df[col] = new_col #Replace existing column with new column
 
 # In other cases, you may need to drop rows, convert strings into numerical data, or clense data
@@ -48,13 +49,12 @@ for col in cols: #for each column
 #    1c. Set up dataframe for the neural network
 hm_test_rows = int(len(df.index) * float(TEST_SPLIT)) #How many rows should we reserve for testing the AI
 hm_train_rows = len(df.index) - hm_test_rows #How many rows should we train on
-hm_inputs = int(len(df.columns)-1) #How many columns will be used for inputs
 
 train = df.head(hm_train_rows) #Get the first # of rows for training
 test = df.tail(hm_test_rows) #Get the last # of rows for testing
 
 X = np.array(train.drop([PREDICTION_COL],1).astype(float)) #Format input data into variable X
-X = np.array(X).reshape(hm_train_rows, hm_inputs) #turn multidimensional array into readable shape
+X = np.array(X).reshape(hm_train_rows, HM_INPUTS) #turn multidimensional array into readable shape
 y = np.array(df[PREDICTION_COL]) #get only self.prediction_col
 
 #   1d. Convert values into one-hot encoded tensors
@@ -70,12 +70,11 @@ for label in y: #for each value in y
 y = new_y #replace y with the new formatted y
 
 test_X = np.array(test.drop([PREDICTION_COL],1).astype(float))
-test_X = np.array(test_X).reshape(hm_test_rows, hm_inputs)
+test_X = np.array(test_X).reshape(hm_test_rows, HM_INPUTS)
 test_y = y[hm_train_rows:]
 
 y = y[:hm_train_rows]
 y = np.array(y)
-hm_outputs = len(y[0])
 
 y_true = test_y #format test_y labels for the acuracy test
 y_true = [np.argmax(x) for x in y_true]
@@ -92,10 +91,10 @@ from tensorflow.python.framework import ops
 ops.reset_default_graph()
 sess = tf.InteractiveSession()
 
-net.add(Dense(hm_inputs,input_dim=hm_inputs))
-#net.add(Dense(hm_inputs,input_shape=(None,hm_inputs)))
+net.add(Dense(HM_INPUTS,input_dim=HM_INPUTS))
+#net.add(Dense(HM_INPUTS,input_shape=(None,HM_INPUTS)))
 net.add(Dense(14))
-net.add(Dense(hm_outputs))
+net.add(Dense(HM_OUTPUTS))
 #sgd = optimizers.SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True) #For custom optimizer
 net.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy']) #Uses default optimizer
 
@@ -118,6 +117,6 @@ while (True):
     inference_str = raw_input('> ')
     inference_tensor = inference_str.split(',')
     inference_tensor = np.array(map(int, inference_tensor))
-    inference_tensor = inference_tensor.reshape((1,hm_inputs))
+    inference_tensor = inference_tensor.reshape((1,HM_INPUTS))
     results = net.predict(inference_tensor)
     print(results)
