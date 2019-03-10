@@ -81,7 +81,7 @@ sess = tf.InteractiveSession()
 
 net.add(Dense(hm_inputs, input_dim=hm_inputs))
 net.add(Dense(14))
-net.add(Dense(hm_outputs))
+net.add(Dense(hm_outputs, activation="softmax"))
 
 net.compile(optimizer='rmsprop', loss='categorical_crossentropy', metrics=['accuracy'])
 
