@@ -32,7 +32,18 @@ Windows: It looked complicated for Windows, so I’m just gunna hope you have it
 `pip install pandas`
 
 ### Copy-paste this line for all:
-`sudo pip install tensorflow && pip install keras && pip install numpy && pip install scipy && pip install pandas && pip install sklearn`
+`pip install --user tensorflow && pip install --user keras && pip install --user numpy && pip install --user scipy && pip install --user pandas && pip install --user sklearn`
+
+## Test the libraries
+python
+
+import tensorflow
+
+import keras
+
+import sklearn
+
+import pandas
 
 ## Get our dataset
 Download the breast cancer dataset from:<br />
