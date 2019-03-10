@@ -34,16 +34,14 @@ Windows: It looked complicated for Windows, so I’m just gunna hope you have it
 ### Copy-paste this line for all:
 `pip install --user tensorflow && pip install --user keras && pip install --user numpy && pip install --user scipy && pip install --user pandas && pip install --user sklearn`
 
-## Test the libraries
+## Test the libraries in Terminal
+```
 python
-
 import tensorflow
-
 import keras
-
 import sklearn
-
 import pandas
+```
 
 ## Get our dataset
 Download the breast cancer dataset from:<br />
