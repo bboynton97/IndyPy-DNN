@@ -18,9 +18,11 @@ LEARNING_RATE = 0.001
 # ~~ 1. Preprocessing
 #
 
+# Import dataset
 df = pd.read_csv('breast-cancer-wisconsin.csv')
 df.drop('id',axis=1,inplace=True)
 
+# Remove holes and replace with mean
 cols = list(df.columns.values)
 for col in cols:
 	only_nums = []
@@ -34,6 +36,7 @@ for col in cols:
 					new_col[row] = col_mean
 	df[col] = new_col
 
+# Split test and train
 hm_test_rows = int(len(df.index) * float(TEST_SPLIT))
 hm_train_rows = len(df.index) - hm_test_rows
 hm_inputs = int(len(df.columns)-1)
@@ -41,12 +44,14 @@ hm_inputs = int(len(df.columns)-1)
 train = df.head(hm_train_rows)
 test = df.tail(hm_test_rows)
 
+# Split inputs and outputs
 X = np.array(train.drop([PREDICTION_COL],1).astype(float))
 X = np.array(X).reshape(hm_train_rows, hm_inputs)
 y = np.array(df[PREDICTION_COL])
 
 label_vals = [2,4]
 
+# Create one hot encoded labels
 new_y = []
 for label in y:
 	empty_tensor = [0,0]
